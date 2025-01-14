@@ -1,6 +1,8 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
+const config = require('./config'); // Import the config module
+const errors = [];
 
 test.describe('Spell Check Test', () => {
   const typoJsPath = path.resolve('./typo.js');
@@ -56,13 +58,34 @@ test.describe('Spell Check Test', () => {
       
     // Attach results to Allure report
     await test.step('Generate Allure report', async () => {
-      test.info().attach('Misspelled Words', {
+      test.info().attach(`Misspelled Words:${config.baseUrl}`, {
         body: JSON.stringify(misspelledWords, null, 2),
         contentType: 'application/json',
       });
     });
 
     // Assert no spelling errors
-    expect(misspelledWords).toEqual([]);
+    expect.soft(misspelledWords).toEqual([]);
+    // try {
+    //   expect(misspelledWords).toEqual([]);
+    //    if (misspelledWords.length > 0) {
+    //       errors.push(`Misspelled words: ${misspelledWords.join(', ')}`);
+    //     }
+
+    //     // After all checks
+    //     if (errors.length > 0) {
+    //       console.log(`Test executed inside try method`);
+    //     }
+    // } catch (error) {
+    //   console.warn('Non-critical failure:', error.message);
+    //     if (misspelledWords.length > 0) {
+    //       errors.push(`Misspelled words: ${misspelledWords.join(', ')}`);
+    //     }
+
+    //     // After all checks
+    //     if (errors.length > 0) {
+    //       console.log(`spellchecking failed with errors `);
+    //     }
+    //         }
   });
 });
