@@ -10,6 +10,7 @@ Serve the report by running this command in the Bash terminal: npx allure open
 This will open a web interface displaying detailed test results, including any misspelled words identified during the test.
 ________________________________________
 *********** Run and open allure reports from localhost *******************************
+
 To Run Base url from Bash command
 
     $ BASE_URL=https://www.teenvoice.com npx playwright test
