@@ -9,5 +9,24 @@ Serve the report by running this command in the Bash terminal: npx allure open
 
 This will open a web interface displaying detailed test results, including any misspelled words identified during the test.
 ________________________________________
+*********** Run and open allure reports from localhost *******************************
 To Run Base url from Bash command
-$ BASE_URL=https://example.com npx playwright test
+
+    $ BASE_URL=https://www.teenvoice.com npx playwright test
+    
+    $ npx allure generate allure-results --clean
+
+    $ allure open
+
+    
+
+To Run Commands in Powershell
+
+    1st execute: $env:BASE_URL="https://www.teenvoice.com"; 
+
+    2nd execute: npx playwright test
+
+    3rd execute: npx allure generate allure-results --clean
+
+    4th execute: allure open
+
