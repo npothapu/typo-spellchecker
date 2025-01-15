@@ -9,6 +9,7 @@ export default defineConfig({
   use: {
    // baseURL: 'https://www.teenvoice.com/', --hard coded url
    baseURL,
+   customVariable: 'vml', //declare a custom dictionary
     },
     
 });

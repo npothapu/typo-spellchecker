@@ -13,7 +13,7 @@ ________________________________________
 
 To Run Base url from Bash command
 
-    $ BASE_URL=https://www.teenvoice.com npx playwright test
+    $ BASE_URL=https://www.teenvoice.com npx playwright test or $ BASE_URL=https://www.vml.com npx playwright test
     
     $ npx allure generate allure-results --clean
 
@@ -23,7 +23,7 @@ To Run Base url from Bash command
 
 To Run Commands in Powershell
 
-    1st execute: $env:BASE_URL="https://www.teenvoice.com"; 
+    1st execute: $env:BASE_URL="https://www.teenvoice.com"; or $env:BASE_URL="https://www.vml.com"; 
 
     2nd execute: npx playwright test
 
