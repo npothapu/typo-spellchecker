@@ -10,4 +10,5 @@ export default defineConfig({
    // baseURL: 'https://www.teenvoice.com/', --hard coded url
    baseURL,
     },
+    
 });

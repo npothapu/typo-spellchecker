@@ -19,7 +19,7 @@ To Run Base url from Bash command
 
     $ allure open
 
-    
+      **** Miscellaneous to clear terminal history in Bash : $ history -c or $ clear ***
 
 To Run Commands in Powershell
 
@@ -30,4 +30,8 @@ To Run Commands in Powershell
     3rd execute: npx allure generate allure-results --clean
 
     4th execute: allure open
+    **** Miscellaneous to clear terminal history in powershell : Clear-History  or  clear-Host ***
+
+
+
 
