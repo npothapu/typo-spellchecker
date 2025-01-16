@@ -1,4 +1,2 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","5201","Check spelling on webpage","","Thu Jan 16 14:15:51 EST 2025","failed","Thu Jan 16 14:15:57 EST 2025","Spell Check Dictionary Test","mainTest.test.js","",""
-"","2934","Check spelling on webpage","","Thu Jan 16 10:56:53 EST 2025","failed","Thu Jan 16 10:56:56 EST 2025","Spell Check Test","spellcheck.test.js","",""
-"","5108","Check spelling on webpage","","Thu Jan 16 12:31:58 EST 2025","failed","Thu Jan 16 12:32:03 EST 2025","Spell Check Dictionary Test","spellcheck.test.js","",""
+"","4089","Check spelling on webpage","","Thu Jan 16 14:33:08 EST 2025","passed","Thu Jan 16 14:33:12 EST 2025","Spell Check Dictionary Test","mainTest.test.js","",""
