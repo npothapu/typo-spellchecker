@@ -11,7 +11,7 @@ module.exports = function (test) {
     const dicPath = path.resolve('./dictionaries/en_US/en_US.dic');
     
     const url = process.env.URL;
-    const dictionaryfilename = process.env.DIC_FILENAME;  // 'vml' will be assigned here
+    const dictionaryfilename = process.env.DIC_FILENAME || 'wpp';  // 'vml' will be assigned here
 
     console.log('Dictionary Filename:', dictionaryfilename);
   
