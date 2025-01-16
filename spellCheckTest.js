@@ -13,6 +13,7 @@ module.exports = function (test) {
     const url = process.env.URL;
     const dictionaryfilename = process.env.DIC_FILENAME || 'wpp';  // 'vml' will be assigned here
 
+    console.log('Current Testing URL for testing:', url);
     console.log('Dictionary Filename:', dictionaryfilename);
   
     // Use template literals to build the dynamic file path
@@ -35,12 +36,29 @@ module.exports = function (test) {
     });
 
     test('Check spelling on webpage', async ({ page, baseURL }) => {
-      if (!baseURL) throw new Error('Base URL not configured.');
+      if (!baseURL) throw new Error('Base URL not configured or is invalid.Base URL not configured.');
       await test.step('Navigate to webpage', async () => {
-        await page.goto(baseURL);
-        console.log(`Navigated to: ${baseURL}`);
+        test.setTimeout(90000); // Set overall test timeout
+      
+        const maxRetries = 3;
+        let retries = 0;
+      
+        while (retries < maxRetries) {
+          try {
+            await page.goto(baseURL, { timeout:30000, waitUntil: 'load' });
+            console.log(`Navigated to: ${baseURL}`);
+            return; // Exit the function if successful
+          } catch (error) {
+            retries++;
+            console.warn(`Retrying navigation (${retries}/${maxRetries})...`);
+            if (retries === maxRetries) {
+              console.error(`Failed to navigate to ${baseURL} after ${maxRetries} attempts:`, error);
+              throw error; // Re-throw if out of retries
+            }
+          }
+        }
       });
-
+      
       await test.step('Inject Typo.js', async () => {
         const typoJsCode = fs.readFileSync(typoJsPath, 'utf8');
         await page.addScriptTag({ content: typoJsCode });
@@ -70,14 +88,19 @@ module.exports = function (test) {
 
       // Attach results to Allure report
       await test.step('Generate Allure report', async () => {
-        test.info().attach(`Misspelled Words:${config.baseUrl}`, {
+        test.info().attach(`Misspelled Words:${config.URL}`, {
           body: JSON.stringify(misspelledWords, null, 2),
           contentType: 'application/json',
         });
       });
 
+      if (misspelledWords.length > 0) {
+        console.error(`Spelling errors detected: ${misspelledWords.join(', ')}`);
+      }
+      
       // Assert no spelling errors
       expect.soft(misspelledWords).toEqual([]);
+
     });
 
 								

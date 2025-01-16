@@ -1,15 +1,25 @@
-require('dotenv').config();
 const { defineConfig } = require('@playwright/test');
 
-const baseURL = process.env.BASE_URL || 'https://example.com';
-if (!baseURL) throw new Error('BASE_URL not set.');
-
 module.exports = defineConfig({
-  testDir: './', 
-  reporter: [['html'],['line'],['allure-playwright']],
-  use: {
-   baseURL: process.env.URL || 'https://www.vml.com',
-   customVariable: 'vml', //declare a custom dictionary
+  testDir: './',
+  reporter: [['html'], ['line'], ['allure-playwright']],
+  timeout: 30000,
+  workers: process.env.CI ? 2 : 4, // Fewer workers in CI for stability
+  projects: [
+    {
+      name: 'Default',
+      use: {
+        baseURL: process.env.URL || 'https://www.vml.com',
+      },
     },
-    
+    {
+      name: 'Ford Tests',  //
+      use: {
+        baseURL: 'https://www.ford.com/',
+        launchOptions: {
+          args: ['--disable-http2'], // Force HTTP/1.1
+        },
+      },
+    },
+  ],
 });
