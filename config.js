@@ -1,5 +1,4 @@
 module.exports = {
-    baseUrl: 'https://www.wpp.com',
-    timeout: 30000,
+     timeout: 60000,
   };
   
