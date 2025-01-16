@@ -8,7 +8,7 @@ module.exports = defineConfig({
   reporter: [['html'],['line'],['allure-playwright']],
   use: {
    // baseURL: 'https://www.teenvoice.com/', --hard coded url
-   baseURL: process.env.URL || 'https://www.google.com',
+   baseURL: process.env.URL || 'https://www.vml.com',
    customVariable: 'vml', //declare a custom dictionary
     },
     

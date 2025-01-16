@@ -1,1 +1,1 @@
-[{"uid":"d64d036d257f1375","name":"Check spelling on webpage","time":{"start":1737041847311,"stop":1737041850751,"duration":3440},"status":"failed","severity":"normal"}]
+[{"uid":"eb911b0d52c1ae35","name":"Check spelling on webpage","time":{"start":1737043013664,"stop":1737043016598,"duration":2934},"status":"failed","severity":"normal"},{"uid":"7a8ccdf2244c584a","name":"Check spelling on webpage","time":{"start":1737046703408,"stop":1737046708220,"duration":4812},"status":"failed","severity":"normal"}]
