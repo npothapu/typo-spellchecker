@@ -8,7 +8,7 @@ module.exports = defineConfig({
   testDir: './', 
   reporter: [['html'],['line'],['allure-playwright']],
   use: {
-   baseURL: process.env.URL || 'https://www.wpp.com',
+   baseURL: process.env.URL || 'https://www.vml.com',
    customVariable: 'vml', //declare a custom dictionary
     },
     

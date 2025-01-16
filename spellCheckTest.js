@@ -9,9 +9,9 @@ module.exports = function (test) {
     const typoJsPath = path.resolve('./typo.js');
     const affPath = path.resolve('./dictionaries/en_US/en_US.aff');
     const dicPath = path.resolve('./dictionaries/en_US/en_US.dic');
-    const customDicPath = path.resolve('./dictionaries-company-customized/teenvoice.dic'); // Path to custom teenvoice dictionary
+    // const customDicPath = path.resolve('./dictionaries-company-customized/teenvoice.dic'); // Path to custom teenvoice dictionary
     // const customDicPath = path.resolve('./dictionaries-company-customized/wpp.dic'); // Path to custom wpp dictionary
-    // const customDicPath = path.resolve('./dictionaries-company-customized/vml.dic'); // Path to custom vml dictionary
+    const customDicPath = path.resolve('./dictionaries-company-customized/vml.dic'); // Path to custom vml dictionary
 																												 
 
     let affContent, dicContent, customWords;
