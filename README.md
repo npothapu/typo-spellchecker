@@ -24,7 +24,8 @@ To Run Base url from Bash command
 
 To Run Commands in Powershell
    1st execute: $env:URL="https://www.wpp.com"; $env:DIC_FILENAME="wpp"; npx playwright test
-            Explanation:
+
+            Explanation of the code:
                 $env:URL="https://www.wpp.com": This sets the environment variable URL to "https://www.wpp.com".
                 $env:DIC_FILENAME="wpp": This sets the environment variable DIC_FILENAME to "wpp".
                 npx playwright test: This runs the Playwright test with the specified environment variables.
