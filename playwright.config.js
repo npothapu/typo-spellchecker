@@ -1,14 +1,14 @@
 require('dotenv').config();
-import { defineConfig } from '@playwright/test';
+const { defineConfig } = require('@playwright/test');
 
 const baseURL = process.env.BASE_URL || 'https://example.com';
 if (!baseURL) throw new Error('BASE_URL not set.');
 
-export default defineConfig({
-  reporter: [['allure-playwright']],
+module.exports = defineConfig({
+  reporter: [['html'],['line'],['allure-playwright']],
   use: {
    // baseURL: 'https://www.teenvoice.com/', --hard coded url
-   baseURL,
+   baseURL: process.env.URL || 'https://www.google.com',
    customVariable: 'vml', //declare a custom dictionary
     },
     

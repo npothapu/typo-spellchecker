@@ -17,7 +17,7 @@ To Run Base url from Bash command
     
     $ npx allure generate allure-results --clean
 
-    $ allure open
+    $ allure open or npx allure open allure-report
 
       **** Miscellaneous to clear terminal history in Bash : $ history -c or $ clear ***
 
@@ -29,8 +29,19 @@ To Run Commands in Powershell
 
     3rd execute: npx allure generate allure-results --clean
 
-    4th execute: allure open
+    4th execute: allure open or npx allure open allure-report
+
     **** Miscellaneous to clear terminal history in powershell : Clear-History  or  clear-Host ***
+
+##########################################################################################################
+    Miscellaneous Notes:
+    1)  To generate a report, use one of the following methods:
+
+          Option 1: Specify all reporter parameters directly in the command line:
+                    bash commands
+                    $ npx playwright spellcheck.test.js --headed --project='chromium' --reporter=line,allure-playwright ?? needs to check this
+          Option 2: Configure the reporter in the playwright.config.js file with the following syntax:
+                    reporter: [['html'], ['line'], ['allure-playwright']]
 
 
 

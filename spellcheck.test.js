@@ -4,7 +4,7 @@ const path = require('path');
 const config = require('./config'); // Import the config module
 const errors = [];
 
-test.describe('Spell Check Test', () => {
+test.describe('Spell Check Dictionary Test', () => {
   const typoJsPath = path.resolve('./typo.js');
   const affPath = path.resolve('./dictionaries/en_US/en_US.aff');
   const dicPath = path.resolve('./dictionaries/en_US/en_US.dic');
