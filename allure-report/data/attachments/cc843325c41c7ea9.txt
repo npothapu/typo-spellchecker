@@ -1,0 +1,44 @@
+Retrying navigation (1/3)...
+Retrying navigation (2/3)...
+Retrying navigation (3/3)...
+Failed to navigate to https://www.ford.com/help/contact after 3 attempts: page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.ford.com/help/contact", waiting until "load"
+
+    at C:\2025Playwright-Projects\typo-spellchecker\spellCheckTest.js:48:24
+    at C:\2025Playwright-Projects\typo-spellchecker\spellCheckTest.js:40:7 {
+  name: 'TimeoutError',
+  [Symbol(step)]: {
+    stepId: 'pw:api@12',
+    location: {
+      file: 'C:\\2025Playwright-Projects\\typo-spellchecker\\spellCheckTest.js',
+      line: 48,
+      column: 24,
+      function: undefined
+    },
+    category: 'pw:api',
+    title: 'page.goto(https://www.ford.com/help/contact)',
+    apiName: 'page.goto',
+    params: {
+      url: 'https://www.ford.com/help/contact',
+      timeout: 30000,
+      waitUntil: 'load'
+    },
+    boxedStack: undefined,
+    steps: [],
+    complete: [Function: complete],
+    endWallTime: 1737123980137,
+    error: {
+      message: 'TimeoutError: page.goto: Timeout 30000ms exceeded.\n' +
+        'Call log:\n' +
+        '\x1B[2m  - navigating to "https://www.ford.com/help/contact", waiting until "load"\x1B[22m\n',
+      stack: 'TimeoutError: page.goto: Timeout 30000ms exceeded.\n' +
+        'Call log:\n' +
+        '\x1B[2m  - navigating to "https://www.ford.com/help/contact", waiting until "load"\x1B[22m\n' +
+        '\n' +
+        '    at C:\\2025Playwright-Projects\\typo-spellchecker\\spellCheckTest.js:48:24\n' +
+        '    at C:\\2025Playwright-Projects\\typo-spellchecker\\spellCheckTest.js:40:7',
+      cause: undefined
+    }
+  }
+}

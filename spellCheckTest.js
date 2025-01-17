@@ -38,14 +38,8 @@ module.exports = function (test) {
     test('Check spelling on webpage', async ({ page, baseURL }) => {
       if (!baseURL) throw new Error('Base URL not configured or is invalid.Base URL not configured.');
       await test.step('Navigate to webpage', async () => {
-        test.setTimeout(90000); // Set overall test timeout
-      
-        const maxRetries = 3;
-        let retries = 0;
-      
-        while (retries < maxRetries) {
           try {
-            await page.goto(baseURL, { timeout:30000, waitUntil: 'load' });
+            await page.goto(baseURL);
             console.log(`Navigated to: ${baseURL}`);
             return; // Exit the function if successful
           } catch (error) {
@@ -55,7 +49,7 @@ module.exports = function (test) {
               console.error(`Failed to navigate to ${baseURL} after ${maxRetries} attempts:`, error);
               throw error; // Re-throw if out of retries
             }
-          }
+          
         }
       });
       
