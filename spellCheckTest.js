@@ -1,27 +1,16 @@
-const { test, expect } = require('@playwright/test');											 
+const { test, expect } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
-const config = require('./config'); // Import the config module
-				  
 
 module.exports = function (test) {
-  test.describe('Spell Check Dictionary Test', () => {
+  test.describe('Spell Check for All Links', () => {
     const typoJsPath = path.resolve('./typo.js');
     const affPath = path.resolve('./dictionaries/en_US/en_US.aff');
     const dicPath = path.resolve('./dictionaries/en_US/en_US.dic');
-    
-    const url = process.env.URL;
-    const dictionaryfilename = process.env.DIC_FILENAME || 'wpp';  // 'vml' will be assigned here
 
-    console.log('Current Testing URL for testing:', url);
-    console.log('Dictionary Filename:', dictionaryfilename);
-  
-    // Use template literals to build the dynamic file path
-    const customDicPath = path.resolve(`./dictionaries-company-customized/${dictionaryfilename}.dic`);
-    // const customDicPath = path.resolve('./dictionaries-company-customized/teenvoice.dic'); // Path to custom teenvoice dictionary
-    // const customDicPath = path.resolve('./dictionaries-company-customized/wpp.dic'); // Path to custom wpp dictionary
-    
-																												 
+    const url = process.env.URL;
+    const dictionaryFilename = process.env.DIC_FILENAME || 'wpp';
+    const customDicPath = path.resolve(`./dictionaries-company-customized/${dictionaryFilename}.dic`);
 
     let affContent, dicContent, customWords;
 
@@ -35,69 +24,68 @@ module.exports = function (test) {
         .filter((word) => word.length > 0);
     });
 
-    test('Check spelling on webpage', async ({ page, baseURL }) => {
-      if (!baseURL) throw new Error('Base URL not configured or is invalid.Base URL not configured.');
-      await test.step('Navigate to webpage', async () => {
-          try {
-            await page.goto(baseURL);
-            console.log(`Navigated to: ${baseURL}`);
-            return; // Exit the function if successful
-          } catch (error) {
-            retries++;
-            console.warn(`Retrying navigation (${retries}/${maxRetries})...`);
-            if (retries === maxRetries) {
-              console.error(`Failed to navigate to ${baseURL} after ${maxRetries} attempts:`, error);
-              throw error; // Re-throw if out of retries
-            }
-          
+    test('Check spelling on all links of the webpage', async ({ page, baseURL }) => {
+      if (!baseURL) throw new Error('Base URL not configured or is invalid.');
+
+      // Navigate to the base URL
+      await page.goto(baseURL);
+       console.log(`Base URL:, ${baseURL}`);
+     const domain = 'https://unitedsoybean.org';  // need to figure out passing as a variable to line 38
+      // Extract all href attributes from anchor tags
+      const links = await page.$$eval('a', (anchors) =>
+        anchors
+          .map((anchor) => anchor.href)
+          .filter((href) => href.startsWith('https://unitedsoybean.org')) // Only include valid URLs
+      );
+
+      console.log('Extracted Links:', links);
+
+      for (const link of links) {
+        console.log(`Checking link: ${link}`);
+
+        try {
+          // Navigate to the link
+          await page.goto(link, { timeout: 60000 });
+
+          // Inject Typo.js for spell checking
+          const typoJsCode = fs.readFileSync(typoJsPath, 'utf8');
+          await page.addScriptTag({ content: typoJsCode });
+
+          // Initialize Typo.js with the custom dictionary
+          await page.evaluate(({ affContent, dicContent, customWords }) => {
+            window.typo = new Typo('en_US', affContent, dicContent);
+            customWords.forEach((word) => {
+              window.typo.dictionaryTable[word] = null;
+            });
+          }, { affContent, dicContent, customWords });
+
+          // Extract page text
+          const pageText = await page.evaluate(() => document.body.innerText);
+
+          // Check for misspelled words
+          const misspelledWords = await page.evaluate((text) => {
+            const normalizeWord = (word) => word.replace(/[^\w'-]/g, '').toLowerCase();
+            const words = text.split(/\s+/).map(normalizeWord).filter(Boolean);
+            return words.filter((word) => !window.typo.check(word));
+          }, pageText);
+
+          // Log and report misspelled words
+          if (misspelledWords.length > 0) {
+            console.error(`Misspelled words found on ${link}:`, misspelledWords);
+            test.info().attach(`Misspelled Words: ${link}`, {
+              body: JSON.stringify(misspelledWords, null, 2),
+              contentType: 'application/json',
+            });
+          } else {
+            console.log(`No spelling errors on ${link}`);
+          }
+
+          // Assert no spelling errors
+          expect.soft(misspelledWords).toEqual([]);
+        } catch (error) {
+          console.error(`Error checking link ${link}:`, error.message);
         }
-      });
-      
-      await test.step('Inject Typo.js', async () => {
-        const typoJsCode = fs.readFileSync(typoJsPath, 'utf8');
-        await page.addScriptTag({ content: typoJsCode });
-      });
-
-      await test.step('Initialize Typo.js with custom dictionary', async () => {
-        await page.evaluate(({ affContent, dicContent, customWords }) => {
-          window.typo = new Typo('en_US', affContent, dicContent);
-          customWords.forEach((word) => {
-            window.typo.dictionaryTable[word] = null;
-          });
-        }, { affContent, dicContent, customWords });
-      });
-
-      const pageText = await test.step('Extract page text', async () => {
-        return page.evaluate(() => document.body.innerText);
-      });
-
-      const misspelledWords = await test.step('Check for misspelled words', async () => {
-        return page.evaluate((text) => {
-																	  
-          const normalizeWord = (word) => word.replace(/[^\w'-]/g, '').toLowerCase();
-          const words = text.split(/\s+/).map(normalizeWord).filter(Boolean);
-          return words.filter((word) => !window.typo.check(word));
-        }, pageText);
-      });
-
-      // Attach results to Allure report
-      await test.step('Generate Allure report', async () => {
-        test.info().attach(`Misspelled Words:${config.URL}`, {
-          body: JSON.stringify(misspelledWords, null, 2),
-          contentType: 'application/json',
-        });
-      });
-
-      if (misspelledWords.length > 0) {
-        console.error(`Spelling errors detected: ${misspelledWords.join(', ')}`);
       }
-      
-      // Assert no spelling errors
-      expect.soft(misspelledWords).toEqual([]);
-
     });
-
-								
-											 
   });
 };

@@ -1,1 +1,1 @@
-{"total":2,"items":[{"uid":"97181cccacba2680526efdd780eb5e3a","name":"Default","statistic":{"failed":1,"broken":0,"skipped":0,"passed":0,"unknown":0,"total":1}},{"uid":"ddea8873b3371ce69bb3cf1114a9201f","name":"Ford Tests","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}
+{"total":1,"items":[{"uid":"97181cccacba2680526efdd780eb5e3a","name":"Default","statistic":{"failed":1,"broken":0,"skipped":0,"passed":0,"unknown":0,"total":1}}]}
