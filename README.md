@@ -82,5 +82,15 @@ Miscellaneous Notes:
             ]
 
 
+passing urls and checking all links in a website run from powershell
+Example:1 unitedsoybean.org
+C:\2025Playwright-Projects\typo-spellchecker> $env:URL="https://unitedsoybean.org/"; $env:DIC_FILENAME="unitedsoybean"; npx playwright test  --project="default"     
+
+Example:2 sherwin-williams
+PS C:\2025Playwright-Projects\typo-spellchecker> $env:URL="https://www.sherwin-williams.com/"; $env:DIC_FILENAME="sherwin-williams"; npx playwright test  --project="default"
+
+Example: 3 teenvoice.com
+PS C:\2025Playwright-Projects\typo-spellchecker> $env:URL="https://www.teenvoice.com"; $env:DIC_FILENAME="teenvoice"; npx playwright test  --project="default"
+
 
 

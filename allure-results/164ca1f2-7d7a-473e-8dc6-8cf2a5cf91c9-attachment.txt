@@ -1,0 +1,58 @@
+Misspelled words found on https://www.teenvoice.com/legal/privacy-policy: [
+  'july',            '12',              'nextgen',
+  'llc',             'dba',             'de-identify',
+  'de-identified',   'deidentified',    'reidentify',
+  'sign-in',         'username',        'ach',
+  'internet',        'internet',        'ip',
+  'internet',        'purposeactivity', 'sign-in',
+  'enquired',        'internet',        'sign-in',
+  'internet',        'sign-in',         'internet',
+  'andor',           'unsubscribe',     'third-party',
+  'third-party',     'third-party',     'third-party',
+  'single-sign',     'third-party',     'third-party',
+  'youve',           'high-quality',    'youve',
+  'andor',           'abovementioned',  'do-not-track',
+  'do-not-track',    '13',              'anonymize',
+  'internet',        '100',             'supportteenvoicecom',
+  'nextgen',         'llc',             'dba',
+  '33',              '2100',            'boston',
+  '02110',           'faq',             'evolveme',
+  'future-planning'
+]
+Misspelled words found on https://www.teenvoice.com/: [
+  'in-depth',         'all-important',  'on-demand',       'pro-tips',
+  'youre',            'non-profit',     '10',              'weve',
+  'self-perceptions', 'offline',        'decision-making', 'decision-making',
+  'wishlist',         'ever-changing',  'weve',            'self-perceptions',
+  'decision-making',  'weve',           'self-images',     'decision-making',
+  'present-day',      'mission-driven', 'weve',            'self-concepts',
+  'ever-changing',    'impactful',      'decision-making', 'non-profit',
+  'mission-driven',   'post-secondary', 'real-world',      'ai',
+  'real-world',       'non-profit',     'decision-makers', 'real-life',
+  'technologys',      'real-world',     'non-profit',      'mission-driven',
+  'real-world',       'in-depth',       'ai',              'real-world',
+  'real-life',        'in-depth',       'ai',              'real-life',
+  'covid-19',         'theyre',         'four-year',       'four-year',
+  'decision-making',  'wishlist',       'covid-19',        'theyre',
+  'four-year',        'offline',        'modern-day',      'covid-19',
+  'post-covid',       'four-year',      'four-year',       'mission-driven',
+  'covid-19',         'non-college',    'four-year',       'in-person',
+  'non-profit',       'mission-driven', 'millennials',     'arent',
+  'well-being',       'non-profit',     'mission-driven',  'post-secondary',
+  'millennials',      'in-person',      'well-being',      'well-being',
+  'stressors',        'far-reaching',   'well-being',      'experiementing',
+  "teen's",           '71',             '64',              'tiktok',
+  'youtube',          'instagramand',   'youre',           'edtech',
+  '71',               '64',             'data-driven',     'safetycritical',
+  'impactful',        'impact-focused', 'identitieskey',   'data-driven',
+  ... 115 more items
+]
+Failed to navigate to https://www.teenvoice.com/features: page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://www.teenvoice.com/features", waiting until "load"
+
+Failed to navigate to https://www.teenvoice.com/insights: page.goto: Target page, context or browser has been closed
+Failed to navigate to https://www.teenvoice.com/about-us: page.goto: Target page, context or browser has been closed
+Failed to navigate to https://www.teenvoice.com/features: page.goto: Target page, context or browser has been closed
+Failed to navigate to https://www.teenvoice.com/insights: page.goto: Target page, context or browser has been closed
+Failed to navigate to https://www.teenvoice.com/about-us: page.goto: Target page, context or browser has been closed
