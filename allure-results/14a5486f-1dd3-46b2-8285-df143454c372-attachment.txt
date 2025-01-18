@@ -1,0 +1,11 @@
+Misspelled words found on https://www.cloudflare.com/5xx-error-landing: [
+  'cloudflare', 'isnt',       'cloudflare',
+  'internet',   'cloudflare', 'cloudflare',
+  'cloudflare', '330',        'cloudflare',
+  'cloudflare', 'tv',         'webinars',
+  'thenet',     'blog',       'sse',
+  'sase',       'galileo',    'athenian',
+  'cloudflare', 'cloudflare', 'trust-hub',
+  'gdpr',       'cloudflare', 'impactesg',
+  '2025',       'cloudflare'
+]

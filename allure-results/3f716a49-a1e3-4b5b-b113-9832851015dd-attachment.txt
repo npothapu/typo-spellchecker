@@ -1,0 +1,73 @@
+Misspelled words found on https://corporate.sherwin-williams.com/media-center/building-our-future.html: [
+  '2021',              'sherwin-williams', 'ohio',
+  'faqs',              '155-year',         'sherwin-williams',
+  'cuyahoga',          'high-performance', '64000',
+  'next-generation',   'industry-leading', 'cleveland',
+  'brecksville',       'ohio',             'sherwin-williams',
+  '4000',              'multi-phase',      'move-in',
+  '2025',              'sherwin-williams', 'hq',
+  'companys',          '150',              'sherwin-williams',
+  "headquarters'",     'faade',            'hq',
+  'cleveland',         'brecksville',      '16m',
+  '7000',              '400',              'sherwin-williams',
+  '4000',              'sherwin-williams', 'faqs',
+  'two-story',         '36-floor',         'multi-level',
+  'sherwin-williams',  'ohio',             'ohio',
+  '4400',              'ohio',             'sherwin-williams',
+  '2020',              '4900',             'ohio',
+  '6000',              'ohio',             'sherwin-williams',
+  '2020',              '6700',             'ohio',
+  'ohio',              '25m',              '557',
+  '107',               'sherwin-williams', '135',
+  'sherwin-williams',  'first-year',       '2014-2023',
+  'sherwin-williams',  'minority-owned',   'women-owned',
+  'organization-wide', 'inbox',            '2024',
+  'sherwin-williams',  'cookieconsent',    'non-essential'
+]
+Misspelled words found on https://www.sherwin-williams.com/store-locator: [
+  '000',              'sherwin-williams',
+  'zippostal',        'zippostal',
+  'andor',            'floorcovering',
+  'canada',           'caribbean',
+  'sherwin-williams', 'sherwin-williams',
+  '2025',             'sherwin-williams',
+  'paintperks',       'paintperks',
+  'sherwin-williams', 'paintperks',
+  'facebook',         'pinterest',
+  'instagram',        'houzz',
+  'youtube',          'cookieconsent',
+  'non-essential'
+]
+Misspelled words found on https://www.sherwin-williams.com/#: [
+  'ide',                  'oems',             'refinishers',
+  '12',                   'sw',               '7005',
+  'sw',                   '7029',             'sw',
+  '7015',                 'sw',               '7008',
+  'sw',                   '7004',             'sw',
+  '7036',                 'sw',               '6385',
+  'sw',                   '7043',             'sw',
+  '6258',                 'tricorn',          'sw',
+  '7016',                 'sw',               '6106',
+  'kilim',                'sw',               '7014',
+  '-',                    'yoursby',          'value-added',
+  'specification-driven', 'time-tested',      'industry-leading',
+  '5000',                 'high-performance', 'industry-leading',
+  'electrocoat',          'oems',             'on-site',
+  'europe',               'time-tested',      'best-in-class',
+  'industry-leading',     'spec-driven',      'safety-enabling',
+  'twist-n-pour',         'mercedes-amg',     'petronas',
+  'sherwin-williams',     'mercedes-amg',     'petronas',
+  'next-level',           'sherwin-williams', 'sherwin-williams',
+  '150',                  'paintperks',       '2025',
+  'sherwin-williams',     'cookieconsent',    'non-essential'
+]
+Misspelled words found on https://www.sherwin-williams.com/login: [
+  'sherwin-williams',
+  '2024',
+  'sherwin-williams',
+  '1-800-474-3794',
+  'cookieconsent',
+  'non-essential'
+]
+Failed to navigate to https://www.sherwin-williams.com/#skip-cmp-nav-target: page.evaluate: Target page, context or browser has been closed
+Failed to navigate to https://www.sherwin-williams.com/: page.goto: Target page, context or browser has been closed

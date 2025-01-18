@@ -27,25 +27,25 @@ module.exports = function (test) {
     test('Check spelling on all links of the webpage', async ({ page, baseURL }) => {
       if (!baseURL) throw new Error('Base URL not configured or is invalid.');
 
-      // Navigate to the base URL
+      // Navigate to the website
       await page.goto(baseURL);
-       console.log(`Base URL:, ${baseURL}`);
-     const domain = 'https://unitedsoybean.org';  // need to figure out passing as a variable to line 38
-      // Extract all href attributes from anchor tags
-      const links = await page.$$eval('a', (anchors) =>
-        anchors
-          .map((anchor) => anchor.href)
-          .filter((href) => href.startsWith('https://unitedsoybean.org')) // Only include valid URLs
-      );
+      //await page.waitForLoadState('networkidle'); // Ensure the page is fully loaded
 
-      console.log('Extracted Links:', links);
+    // Extract and normalize all href attributes from anchor tags
+  const links = await page.$$eval(
+    'a',
+    (anchors, base) => anchors.map(anchor => new URL(anchor.href, base).href),
+    baseURL // Pass the base URL for relative link resolution
+  );
+
+  console.log('Extracted Links:', links);
 
       for (const link of links) {
-        console.log(`Checking link: ${link}`);
+        //console.log(`Checking link: ${link}`);
 
         try {
-          // Navigate to the link
-          await page.goto(link, { timeout: 60000 });
+          console.log(`Navigating to: ${link}`);
+          await page.goto(link);
 
           // Inject Typo.js for spell checking
           const typoJsCode = fs.readFileSync(typoJsPath, 'utf8');
@@ -83,7 +83,7 @@ module.exports = function (test) {
           // Assert no spelling errors
           expect.soft(misspelledWords).toEqual([]);
         } catch (error) {
-          console.error(`Error checking link ${link}:`, error.message);
+          console.error(`Failed to navigate to ${link}:`, error.message);
         }
       }
     });
