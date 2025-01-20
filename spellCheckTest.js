@@ -8,8 +8,8 @@ module.exports = function (test) {
     const affPath = path.resolve('./dictionaries/en_US/en_US.aff');
     const dicPath = path.resolve('./dictionaries/en_US/en_US.dic');
 
-    const url = process.env.URL;
-    const dictionaryFilename = process.env.DIC_FILENAME || 'wpp';
+    const url = process.env.URL || 'https://www.ford.com'; // Default to 'https://unitedsoybean.com' if URL is not set
+    const dictionaryFilename = process.env.DIC_FILENAME || 'ford';
     const customDicPath = path.resolve(`./dictionaries-company-customized/${dictionaryFilename}.dic`);
 
     let affContent, dicContent, customWords;
@@ -29,14 +29,14 @@ module.exports = function (test) {
 
       // Navigate to the base URL
       await page.goto(baseURL);
-       console.log(`Base URL:, ${baseURL}`);
-     const domain = 'https://unitedsoybean.org';  // need to figure out passing as a variable to line 38
+      console.log(`Base URL: ${baseURL}`);
+
       // Extract all href attributes from anchor tags
-      const links = await page.$$eval('a', (anchors) =>
+      const links = await page.$$eval('a', (anchors, url) =>
         anchors
           .map((anchor) => anchor.href)
-          .filter((href) => href.startsWith('https://unitedsoybean.org')) // Only include valid URLs
-      );
+          .filter((href) => href.startsWith(url)) // Only include valid URLs
+      , url);
 
       console.log('Extracted Links:', links);
 

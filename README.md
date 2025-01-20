@@ -51,7 +51,10 @@ You can pass project-specific values configured in the Playwright configuration 
         For a custom project (e.g., "Ford Tests"): Append --project="Ford Tests" to the end of the npx playwright test command.
         Examples:
             $env:URL="https://www.teenvoice.com"; $env:DIC_FILENAME="teenvoice"; npx playwright test --project="default"  
+            $env:URL="https://www.vml.com"; $env:DIC_FILENAME="vml"; npx playwright test --project="default" 
+            $env:URL="https://www.wpp.com"; $env:DIC_FILENAME="wpp"; npx playwright test --project="default" 
             $env:URL="https://www.ford.com"; $env:DIC_FILENAME="ford"; npx playwright test --project="Ford Tests"  
+            $env:URL="https://www.unitedsoybean.com"; $env:DIC_FILENAME="unitedsoybean"; npx playwright test --project="Ford Tests"  
 
 3. To generate an Allure report:
         npx allure generate allure-results --clean  

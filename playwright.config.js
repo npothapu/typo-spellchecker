@@ -13,7 +13,7 @@ module.exports = defineConfig({
     {
       name: 'Default',
       use: {
-        baseURL: process.env.URL || 'https://www.vml.com',
+        baseURL: process.env.URL || 'https://www.wpp.com',
       },
     },
     // {
