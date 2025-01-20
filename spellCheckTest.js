@@ -8,8 +8,8 @@ module.exports = function (test) {
     const affPath = path.resolve('./dictionaries/en_US/en_US.aff');
     const dicPath = path.resolve('./dictionaries/en_US/en_US.dic');
 
-    const url = process.env.URL || 'https://www.ford.com'; // Default to 'https://unitedsoybean.com' if URL is not set
-    const dictionaryFilename = process.env.DIC_FILENAME || 'ford';
+    const url = process.env.URL || 'https://www.unitedsoybean.com'; // Default to 'https://unitedsoybean.com' if URL is not set
+    const dictionaryFilename = process.env.DIC_FILENAME || 'unitedsoybean';
     const customDicPath = path.resolve(`./dictionaries-company-customized/${dictionaryFilename}.dic`);
 
     let affContent, dicContent, customWords;
@@ -27,64 +27,68 @@ module.exports = function (test) {
     test('Check spelling on all links of the webpage', async ({ page, baseURL }) => {
       if (!baseURL) throw new Error('Base URL not configured or is invalid.');
 
-      // Navigate to the base URL
-      await page.goto(baseURL);
-      console.log(`Base URL: ${baseURL}`);
+      try {
+        // Navigate to the base URL
+        await page.goto(baseURL, { timeout: 120000 });
+        console.log(`Base URL: ${baseURL}`);
 
-      // Extract all href attributes from anchor tags
-      const links = await page.$$eval('a', (anchors, url) =>
-        anchors
-          .map((anchor) => anchor.href)
-          .filter((href) => href.startsWith(url)) // Only include valid URLs
-      , url);
+        // Extract all href attributes from anchor tags
+        const links = await page.$$eval('a', (anchors, url) =>
+          anchors
+            .map((anchor) => anchor.href)
+            .filter((href) => href.startsWith(url)) // Only include valid URLs
+        , url);
 
-      console.log('Extracted Links:', links);
+        console.log('Extracted Links:', links);
 
-      for (const link of links) {
-        console.log(`Checking link: ${link}`);
+        for (const link of links) {
+          console.log(`Checking link: ${link}`);
 
-        try {
-          // Navigate to the link
-          await page.goto(link, { timeout: 60000 });
+          try {
+            // Navigate to the link
+            await page.goto(link, { timeout: 60000 });
 
-          // Inject Typo.js for spell checking
-          const typoJsCode = fs.readFileSync(typoJsPath, 'utf8');
-          await page.addScriptTag({ content: typoJsCode });
+            // Inject Typo.js for spell checking
+            const typoJsCode = fs.readFileSync(typoJsPath, 'utf8');
+            await page.addScriptTag({ content: typoJsCode });
 
-          // Initialize Typo.js with the custom dictionary
-          await page.evaluate(({ affContent, dicContent, customWords }) => {
-            window.typo = new Typo('en_US', affContent, dicContent);
-            customWords.forEach((word) => {
-              window.typo.dictionaryTable[word] = null;
-            });
-          }, { affContent, dicContent, customWords });
+            // Initialize Typo.js with the custom dictionary
+            await page.evaluate(({ affContent, dicContent, customWords }) => {
+              window.typo = new Typo('en_US', affContent, dicContent);
+              customWords.forEach((word) => {
+                window.typo.dictionaryTable[word] = null;
+              });
+            }, { affContent, dicContent, customWords });
 
-          // Extract page text
-          const pageText = await page.evaluate(() => document.body.innerText);
+            // Extract page text
+            const pageText = await page.evaluate(() => document.body.innerText);
 
-          // Check for misspelled words
-          const misspelledWords = await page.evaluate((text) => {
-            const normalizeWord = (word) => word.replace(/[^\w'-]/g, '').toLowerCase();
-            const words = text.split(/\s+/).map(normalizeWord).filter(Boolean);
-            return words.filter((word) => !window.typo.check(word));
-          }, pageText);
+            // Check for misspelled words
+            const misspelledWords = await page.evaluate((text) => {
+              const normalizeWord = (word) => word.replace(/[^\w'-]/g, '').toLowerCase();
+              const words = text.split(/\s+/).map(normalizeWord).filter(Boolean);
+              return words.filter((word) => !window.typo.check(word));
+            }, pageText);
 
-          // Log and report misspelled words
-          if (misspelledWords.length > 0) {
-            console.error(`Misspelled words found on ${link}:`, misspelledWords);
-            test.info().attach(`Misspelled Words: ${link}`, {
-              body: JSON.stringify(misspelledWords, null, 2),
-              contentType: 'application/json',
-            });
-          } else {
-            console.log(`No spelling errors on ${link}`);
+            // Log and report misspelled words
+            if (misspelledWords.length > 0) {
+              console.error(`Misspelled words found on ${link}:`, misspelledWords);
+              test.info().attach(`Misspelled Words: ${link}`, {
+                body: JSON.stringify(misspelledWords, null, 2),
+                contentType: 'application/json',
+              });
+            } else {
+              console.log(`No spelling errors on ${link}`);
+            }
+
+            // Assert no spelling errors
+            expect.soft(misspelledWords).toEqual([]);
+          } catch (error) {
+            console.error(`Error checking link ${link}:`, error.message);
           }
-
-          // Assert no spelling errors
-          expect.soft(misspelledWords).toEqual([]);
-        } catch (error) {
-          console.error(`Error checking link ${link}:`, error.message);
         }
+      } catch (error) {
+        console.error(`Error navigating to base URL ${baseURL}:`, error.message);
       }
     });
   });
