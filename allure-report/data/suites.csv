@@ -1,2 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","32873","Check spelling on all links of the webpage","Default","Mon Jan 20 13:35:52 EST 2025","failed","Mon Jan 20 13:36:25 EST 2025","Spell Check for All Links","mainTest.test.js","",""

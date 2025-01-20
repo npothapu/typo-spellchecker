@@ -1,29 +1,51 @@
 const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
+  // Directory where the tests are located
   testDir: './',
-  reporter: [['html'], ['line'], ['allure-playwright']],
+
+  // Reporters for test results
+  reporter: [
+    ['html'], // Generates an HTML report
+    ['line'], // Outputs a line report to the console
+    ['allure-playwright'], // Generates an Allure report for detailed test results
+  ],
+
+  // Default timeout for each test in milliseconds
   timeout: 90000,
-  /* Retry on CI only */
-  retries: process.env.CI ? 1 : 0, //This sets retries to 2 in a CI environment (process.env.CI is truthy) and 1 otherwise.
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 2 : 3, // Fewer workers in CI for stability: sets workers to 2 in CI, 3 otherwise.
-  
+
+  // Retries configuration for tests
+  retries: process.env.CI ? 1 : 0, // Retries set to 1 in a CI environment, 0 otherwise
+
+  // Number of workers (parallel test runners)
+  workers: process.env.CI ? 2 : 3, // Uses 2 workers in CI, 3 otherwise
+
+  // Define projects to configure different test environments
   projects: [
     {
-      name: 'Default',
+      name: 'Default', // Name of the project
       use: {
-        baseURL: process.env.URL || 'https://www.wpp.com',
+        // Base URL for the tests
+        baseURL: process.env.URL || 'https://www.wpp.com', // Default URL if not set in the environment variables
+
+        // Headless mode configuration
+        headless: true, // Run tests in headless mode (no browser UI)
       },
     },
-    // {
-    //   name: 'Ford Tests',  //
-    //   use: {
-    //     baseURL: process.env.URL || 'https://www.ford.com/help/contact/',
-    //     launchOptions: {
-    //       args: ['--disable-http2'], // Force HTTP/1.1
-    //     },
-    //   },
-    // },
+    {
+      name: 'Headless Tests', // Name of the project for headless tests
+      use: {
+        // Base URL for the tests
+        baseURL: process.env.URL || 'https://www.wpp.com', // Default URL if not set in the environment variables
+
+        // Headless mode configuration
+        headless: false, // Run tests with browser UI (headless mode off)
+
+        // Browser launch options
+        launchOptions: {
+          args: ['--disable-http2'], // Disable HTTP/2 to force HTTP/1.1 for the browser
+        },
+      },
+    },
   ],
 });
