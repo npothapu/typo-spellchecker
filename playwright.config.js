@@ -26,7 +26,7 @@ module.exports = defineConfig({
       name: 'Default', // Name of the project
       use: {
         // Base URL for the tests
-        baseURL: process.env.URL || 'https://www.wpp.com', // Default URL if not set in the environment variables
+        baseURL: process.env.URL || 'https://www.vml.com', // Default URL if not set in the environment variables
 
         // Headless mode configuration
         headless: true, // Run tests in headless mode (no browser UI)

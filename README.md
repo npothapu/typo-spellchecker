@@ -146,12 +146,15 @@ To run Playwright tests using PowerShell, follow these steps:
         by default Headless= true
         $env:URL="https://www.vml.com"; $env:DIC_FILENAME="vml"; npx playwright test --project="default"
         $env:URL="https://www.teenvoice.com"; $env:DIC_FILENAME="teenvoice"; npx playwright test --project="default" 
-        $env:URL="https://www.unitedsoybean.com"; $env:DIC_FILENAME="sherwin-williams"; npx playwright test --project="default" 
-       
+        $env:URL="https://www.sherwin-williams.com/"; $env:DIC_FILENAME="sherwin-williams"; npx playwright test --project="default" 
+        $env:URL="https://www.unitedsoybean.com"; $env:DIC_FILENAME="unitedsoybean"; npx playwright test --project="default" 
+        
+
         pass headless= true value
         $env:URL="https://www.vml.com"; $env:DIC_FILENAME="vml"; env:HEADLESS="true"; npx playwright test --project="default"
         $env:URL="https://www.teenvoice.com"; $env:DIC_FILENAME="teenvoice"; env:HEADLESS="true"; npx playwright test --project="default" 
-        $env:URL="https://www.unitedsoybean.com"; $env:DIC_FILENAME="sherwin-williams"; $env:HEADLESS="true"; npx playwright test --project="Ford Tests"  
+        $env:URL="https://www.sherwin-williams.com/"; $env:DIC_FILENAME="sherwin-williams"; $env:HEADLESS="true"; npx playwright test --project="default"  
+        $env:URL="https://www.unitedsoybean.com"; $env:DIC_FILENAME="unitedsoybean"; $env:HEADLESS="true"; npx playwright test --project="default" 
         
         pass headless= false only this works for www.ford.com or www.wpp.com     
         $env:URL="https://www.wpp.com"; $env:DIC_FILENAME="wpp"; $env:HEADLESS="false"; npx playwright test --project="Headless Tests" 
